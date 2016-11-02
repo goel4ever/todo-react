@@ -1,0 +1,33 @@
+{
+  "name": "todo-react",
+  "version": "1.0.0",
+  "description": "TODO app in react",
+  "main": "index.js",
+  "dependencies": {
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  },
+  "devDependencies": {
+    "expect": "^1.20.2",
+    "mocha": "^3.1.2",
+    "react-addons-test-utils": "^15.3.2"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/goel4ever/todo-react.git"
+  },
+  "keywords": [
+    "react",
+    "mocha",
+    "todo"
+  ],
+  "author": "Anshul Goel <dec.anshul@gmail.com> (http://goel4ever.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/goel4ever/todo-react/issues"
+  },
+  "homepage": "https://github.com/goel4ever/todo-react"
+}
