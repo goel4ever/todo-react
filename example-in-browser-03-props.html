@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO React App</title>
+    <script src="node_modules/react/dist/react.js"></script>
+    <script src="node_modules/react-dom/dist/react-dom.js"></script>
+    <!-- Add slow but in-browser transpiling. Version 6 and above will not work this way -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.js"></script>
+</head>
+<body>
+    <div id="rootBase"></div>
+    <div id="root"></div>
+    <div id="rootStateless"></div>
+
+    <script type="text/babel">
+        class MyComponentClass extends React.Component {
+            render() {
+                return <div>
+                    <h1>{this.props.text}</h1>
+                    <p>{this.props.children}</p>
+                </div>
+            }
+        }
+        ReactDOM.render(
+                <MyComponentClass text="Hello World 1">
+                    First React Component via class
+                </MyComponentClass>,
+                document.getElementById('rootBase')
+        );
+
+        var MyComponent = React.createClass({
+            render() {
+                return <div>
+                    <h1>{this.props.text}</h1>
+                    <p>{this.props.children}</p>
+                </div>
+            }
+        });
+        ReactDOM.render(
+                <MyComponent text="Hello World 2">
+                    First React Component via createClass
+                </MyComponent>,
+                document.getElementById('root')
+        );
+
+        const MyComponentStateless = () => {
+            return <div>
+                <h1>Hello World 3</h1>
+                <p>First React Component via stateless function</p>
+            </div>
+        };
+        ReactDOM.render(
+                <MyComponentStateless/>,
+                document.getElementById('rootStateless')
+        );
+
+    </script>
+</body>
+</html>
