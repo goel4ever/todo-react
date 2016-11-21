@@ -22,13 +22,22 @@
             },
             edit() {
                 this.setState({editing: true});
-                alert('Editing note');
+            },
+            save() {
+                this.setState({editing: false});
             },
             remove() {
                 this.setState({remove: true});
-                alert('Removing note');
             },
-            render() {
+            renderForm() {
+                return (
+                        <div className="note">
+                            <textarea></textarea>
+                            <button onClick={this.save}>Save</button>
+                        </div>
+                );
+            },
+            renderDisplay() {
                 return (
                         <div className="note">
                             <p>{this.props.children}</p>
@@ -38,6 +47,13 @@
                             </span>
                         </div>
                 )
+            },
+            render() {
+                if (this.state.editing) {
+                    return this.renderForm();
+                } else {
+                    return this.renderDisplay();
+                }
             }
         });
 
