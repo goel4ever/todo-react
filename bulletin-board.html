@@ -17,14 +17,18 @@
             getInitialState() {
                 return {
                     editing: false,
-                    remove: false
+                    remove: false,
+                    noteText: "check"
                 };
             },
             edit() {
                 this.setState({editing: true});
             },
             save() {
-                this.setState({editing: false});
+                this.setState({
+                    editing: false,
+                    noteText: this.refs.newText.value
+                });
             },
             remove() {
                 this.setState({remove: true});
@@ -32,7 +36,7 @@
             renderForm() {
                 return (
                         <div className="note">
-                            <textarea></textarea>
+                            <textarea ref="newText"></textarea>
                             <button onClick={this.save}>Save</button>
                         </div>
                 );
@@ -49,11 +53,7 @@
                 )
             },
             render() {
-                if (this.state.editing) {
-                    return this.renderForm();
-                } else {
-                    return this.renderDisplay();
-                }
+                return (this.state.editing) ? this.renderForm() : this.renderDisplay();
             }
         });
 
