@@ -13,6 +13,38 @@
     <div id="react-container"></div>
 
     <script type="text/babel">
+        var Board = React.createClass({
+            propTypes: {
+                count: function(props, propName) {
+                    if(typeof props[propName] !== 'number') {
+                        return new Error('The count must be a number');
+                    }
+
+                    if(props[propName] > 100) {
+                        return new Error('Creating these many notes is ridiculous');
+                    }
+                }
+            },
+            getInitialState() {
+                return {
+                    notes: [
+                        {id: 0, text: 'Call someone'},
+                        {id: 1, text: 'Eat Lunch'},
+                        {id: 2, text: 'Finish Proposal'}
+                    ]
+                }
+            },
+            render() {
+                return (
+                        <div className="board">
+                            {this.state.notes.map((note, i) => {
+                                return <Note key={i}>{note.text}</Note>
+                            })}
+                        </div>
+                );
+            }
+        });
+
         var Note = React.createClass({
             getInitialState() {
                 return {
@@ -57,10 +89,15 @@
             }
         });
 
+//        ReactDOM.render(
+//                <Note>Hello World</Note>,
+//                document.getElementById('react-container')
+//        );
+
         ReactDOM.render(
-                <Note>Hello World</Note>,
+                <Board count={10}></Board>,
                 document.getElementById('react-container')
-        )
+        );
     </script>
 </body>
 </html>
