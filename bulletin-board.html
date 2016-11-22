@@ -7,6 +7,10 @@
     <script src="node_modules/react-dom/dist/react-dom.js"></script>
     <!-- Add slow but in-browser transpiling. Version 6 and above will not work this way -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.js"></script>
+
+    <!-- API for loading data -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.js"></script>
+
     <link rel="stylesheet" type="text/css" href="bulletin-board.css">
 </head>
 <body>
@@ -30,16 +34,32 @@
                     notes: []
                 }
             },
+            componentWillMount() {
+                if(this.props.count) {
+                    var url = `http://baconipsum.com/api/?type=all-meat&sentences=${this.props.count}`;
+                    fetch(url)
+                            .then(results => results.json())
+                            .then(array => array[0])
+                            .then(text => text.split('. '))
+                            .then(array => array.forEach(
+                                    sentence => this.add(sentence)
+                            ))
+                            .catch(function(err) {
+                                console.log('Didn\'t connect to the api', err);
+                                this.add();
+                            });
+                }
+            },
             nextId() {
                 this.uniqueId = this.uniqueId || 0;
                 return this.uniqueId++;
             },
-            add() {
+            add(text = 'New Note') {
                 var notes = [
                         ...this.state.notes,
                         {
                             id: this.nextId(),
-                            text: 'New Note'
+                            text: text
                         }
                 ];
 
