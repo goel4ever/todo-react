@@ -10,6 +10,8 @@
 
     <!-- API for loading data -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.js"></script>
+    <!-- Wraps a component into another component called 'Draggable' which allows the dragging feature -->
+    <script src="https://npmcdn.com/react-draggable"></script>
 
     <link rel="stylesheet" type="text/css" href="bulletin-board.css">
 </head>
@@ -45,8 +47,8 @@
                                     sentence => this.add(sentence)
                             ))
                             .catch(function(err) {
-                                console.log('Didn\'t connect to the api', err);
-                                this.add();
+                                console.log('Didn\'t connect to the api\n', err);
+                                // Handle default note if nothing gets fetched
                             });
                 }
             },
@@ -160,7 +162,10 @@
                 )
             },
             render() {
-                return (this.state.editing) ? this.renderForm() : this.renderDisplay();
+                return (<ReactDraggable>
+                    {(this.state.editing) ? this.renderForm() : this.renderDisplay()}
+                    </ReactDraggable>
+                );
             }
         });
 
