@@ -3,18 +3,14 @@ import Task from './Task';
 
 class TaskList extends React.Component {
   render() {
-    const task = {
-      taskName: 'TaskHeading',
-      taskDescription: 'Task details goes here...',
-      taskStatus: 'OPEN',
-      creationDate: '20161201'
-    };
+    const rows = [];
+    this.props.data.forEach((task) => {
+      rows.push(<Task key={task.uniqueId} data={task}/>);
+    });
 
     return (
       <div>
-        <Task data={task}/>
-        <Task data={task}/>
-        <Task data={task}/>
+        {rows}
       </div>
     );
   }
